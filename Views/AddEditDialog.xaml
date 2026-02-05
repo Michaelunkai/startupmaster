@@ -1,0 +1,103 @@
+<Window x:Class="StartupMaster.Views.AddEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="Add/Edit Startup Item" 
+        Height="500" Width="600"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Name -->
+        <TextBlock Grid.Row="0" Text="Name:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="0" Name="NameTextBox" Margin="0,25,0,0" Height="32" 
+                 ui:ControlHelper.PlaceholderText="Enter a name for this startup item"/>
+
+        <!-- Command -->
+        <TextBlock Grid.Row="1" Text="Command/Path:" FontWeight="SemiBold" Margin="0,15,0,5"/>
+        <Grid Grid.Row="1" Margin="0,40,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="CommandTextBox" Height="32" 
+                     ui:ControlHelper.PlaceholderText="Path to executable"/>
+            <Button Grid.Column="1" Content="📁 Browse" Width="100" Height="32" 
+                    Margin="10,0,0,0" Click="BrowseButton_Click"/>
+        </Grid>
+
+        <!-- Arguments -->
+        <TextBlock Grid.Row="2" Text="Arguments (optional):" FontWeight="SemiBold" Margin="0,15,0,5"/>
+        <TextBox Grid.Row="2" Name="ArgumentsTextBox" Margin="0,40,0,0" Height="32" 
+                 ui:ControlHelper.PlaceholderText="Command line arguments"/>
+
+        <!-- Location -->
+        <TextBlock Grid.Row="3" Text="Location:" FontWeight="SemiBold" Margin="0,15,0,5"/>
+        <ComboBox Grid.Row="3" Name="LocationComboBox" Margin="0,40,0,0" Height="32"
+                  SelectionChanged="LocationComboBox_SelectionChanged">
+            <ComboBoxItem Content="Registry (Current User)" Tag="RegistryCurrentUser" IsSelected="True"/>
+            <ComboBoxItem Content="Registry (Local Machine - All Users)" Tag="RegistryLocalMachine"/>
+            <ComboBoxItem Content="Startup Folder" Tag="StartupFolder"/>
+            <ComboBoxItem Content="Task Scheduler (with delay support)" Tag="TaskScheduler"/>
+        </ComboBox>
+
+        <!-- Delay -->
+        <StackPanel Grid.Row="4" Margin="0,15,0,0" Name="DelayPanel" Visibility="Collapsed">
+            <TextBlock Text="Startup Delay (seconds):" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Slider Name="DelaySlider" Minimum="0" Maximum="300" Value="0" 
+                        TickFrequency="10" IsSnapToTickEnabled="True"
+                        VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Name="DelayValueText" Text="0s" 
+                           Width="50" Margin="10,0,0,0" VerticalAlignment="Center"
+                           FontWeight="Bold" FontSize="14"/>
+            </Grid>
+        </StackPanel>
+
+        <!-- Description -->
+        <TextBlock Grid.Row="5" Text="Notes:" FontWeight="SemiBold" Margin="0,15,0,5"/>
+        <TextBox Grid.Row="5" Name="NotesTextBox" Margin="0,40,0,0" Height="80" 
+                 TextWrapping="Wrap" AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"
+                 ui:ControlHelper.PlaceholderText="Optional notes about this startup item"/>
+
+        <!-- Info Panel -->
+        <Border Grid.Row="6" Background="#1A0078D4" BorderBrush="#0078D4" 
+                BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,15,0,0">
+            <StackPanel>
+                <TextBlock Text="💡 Tips:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBlock TextWrapping="Wrap" Opacity="0.9">
+                    • Registry (Current User): Runs only for your account<LineBreak/>
+                    • Registry (Local Machine): Runs for all users (requires admin)<LineBreak/>
+                    • Startup Folder: Simple shortcut-based startup<LineBreak/>
+                    • Task Scheduler: Best for delayed starts and advanced control
+                </TextBlock>
+            </StackPanel>
+        </Border>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Cancel" Width="100" Height="35" Margin="0,0,10,0" 
+                    Click="CancelButton_Click"/>
+            <Button Content="Save" Width="100" Height="35" 
+                    Click="SaveButton_Click" IsDefault="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,130 @@
+<Window x:Class="StartupMaster.Views.BatchOperationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="Batch Operations" 
+        Height="600" Width="800"
+        WindowStartupLocation="CenterOwner">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="⚡ Batch Operations" FontSize="24" FontWeight="Bold"/>
+            <TextBlock Text="Perform actions on multiple items at once" 
+                       FontSize="14" Opacity="0.7" Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <!-- Operations -->
+        <TabControl Grid.Row="1">
+            <!-- Disable High Impact -->
+            <TabItem Header="Disable High Impact">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="0,0,0,15">
+                        Disable all high-impact items (score 7+) to significantly improve boot time.
+                        These items can be re-enabled individually if needed.
+                    </TextBlock>
+
+                    <ListBox Grid.Row="1" Name="HighImpactList" SelectionMode="Multiple"/>
+
+                    <Button Grid.Row="2" Content="Disable Selected" Width="150" Height="35" 
+                            Margin="0,15,0,0" HorizontalAlignment="Right"
+                            Click="DisableHighImpactButton_Click"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Add Delays -->
+            <TabItem Header="Add Smart Delays">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="0,0,0,15">
+                        Automatically add appropriate delays to items based on their impact level.
+                        Items will be migrated to Task Scheduler for delay support.
+                    </TextBlock>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
+                        <TextBlock Text="Delay Strategy:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <RadioButton Name="ConservativeRadio" Content="Conservative (longer delays)" 
+                                   IsChecked="True" Margin="0,0,15,0"/>
+                        <RadioButton Name="AggressiveRadio" Content="Aggressive (shorter delays)"/>
+                    </StackPanel>
+
+                    <ListBox Grid.Row="2" Name="DelayList" SelectionMode="Multiple"/>
+
+                    <Button Grid.Row="3" Content="Apply Delays" Width="150" Height="35" 
+                            Margin="0,15,0,0" HorizontalAlignment="Right"
+                            Click="ApplyDelaysButton_Click"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Clean Duplicates -->
+            <TabItem Header="Clean Duplicates">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="0,0,0,15">
+                        Remove duplicate startup entries (same command in multiple locations).
+                        Keeps the best location for each item.
+                    </TextBlock>
+
+                    <ListBox Grid.Row="1" Name="DuplicatesList" SelectionMode="Multiple"/>
+
+                    <Button Grid.Row="2" Content="Remove Selected Duplicates" Width="200" Height="35" 
+                            Margin="0,15,0,0" HorizontalAlignment="Right"
+                            Click="RemoveDuplicatesButton_Click"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Disable All -->
+            <TabItem Header="Quick Actions">
+                <StackPanel Margin="10">
+                    <Button Content="🚨 Disable All (Emergency)" 
+                            Height="50" Margin="0,10" Click="DisableAllButton_Click"/>
+                    <TextBlock TextWrapping="Wrap" Opacity="0.7" Margin="0,0,0,20">
+                        Disables ALL startup items. Use only in emergency situations when Windows won't boot properly.
+                    </TextBlock>
+
+                    <Button Content="✅ Enable All Previously Disabled" 
+                            Height="50" Margin="0,10" Click="EnableAllButton_Click"/>
+                    <TextBlock TextWrapping="Wrap" Opacity="0.7" Margin="0,0,0,20">
+                        Re-enables all currently disabled items.
+                    </TextBlock>
+
+                    <Button Content="🗑️ Remove All Disabled" 
+                            Height="50" Margin="0,10" Click="RemoveDisabledButton_Click"/>
+                    <TextBlock TextWrapping="Wrap" Opacity="0.7">
+                        Permanently removes all disabled items to clean up your configuration.
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Cancel" Width="100" Height="35" Margin="0,0,10,0" 
+                    Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

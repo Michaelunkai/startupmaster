@@ -1,0 +1,2 @@
+F:\study\Dev_Toolchain\programming\.NET\projects\C#\StartupMaster\dist\StartupMaster_v1.3\StartupMaster.pdb
+F:\study\Dev_Toolchain\programming\.NET\projects\C#\StartupMaster\dist\StartupMaster_v1.3\StartupMaster.exe

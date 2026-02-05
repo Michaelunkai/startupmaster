@@ -1,0 +1,11 @@
+
+
+
+
+# gitit: auto-excluded large files (>100MB)
+dist/StartupMaster_v1.1/StartupMaster.exe
+dist/StartupMaster_v1.2/StartupMaster.exe
+dist/StartupMaster_v1.3/StartupMaster.exe
+dist/StartupMaster_v1.4/StartupMaster.exe
+dist/StartupMaster_v1.5/StartupMaster.exe
+dist/StartupMaster_v1.6/StartupMaster.exe

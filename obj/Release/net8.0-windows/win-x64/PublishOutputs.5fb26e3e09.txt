@@ -1,0 +1,2 @@
+C:\Users\micha\.openclaw\workspace\StartupMaster\bin\Release\net8.0-windows\win-x64\publish\StartupMaster.pdb
+C:\Users\micha\.openclaw\workspace\StartupMaster\bin\Release\net8.0-windows\win-x64\publish\StartupMaster.exe
